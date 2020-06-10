@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 const List<Note> notes = const <Note>[
-  const Note('标题1111111111111111111111111111111', '内容111111111111',
-      '2019-01-01', false),
+  const Note('标题1', '内容1', '2019-01-01', false),
   const Note('标题2', '内容2', '2019-01-01', true),
   const Note('标题3', '内容3', '2019-01-01', false),
   const Note('标题4', '内容4', '2019-01-01', true),
@@ -45,14 +44,13 @@ class OverflowText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      width: 90.0,
-      child: new Text(
-        text,
-        textAlign: TextAlign.left, 
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1, 
-      )
-    );
+        width: 90.0,
+        child: new Text(
+          text,
+          textAlign: TextAlign.left,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ));
   }
 }
 
@@ -76,18 +74,21 @@ class _NoteItemState extends State<NoteItem> {
         color: Colors.white,
         margin: const EdgeInsets.all(10.0),
         child: new Container(
-          height: 80.0,
-          padding: const EdgeInsets.only(left:20.0,top: 16.0),
+          height: 100.0,
+          padding: const EdgeInsets.only(left: 20.0, top: 16.0),
           child: new Row(
             children: <Widget>[
               new Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:<Widget>[
-                  new Text('Hello World',style: TextStyle(fontSize: 22.0)),
-                  new Text('Hello World',style: TextStyle(fontSize: 12.0,color: Colors.grey),),
-                ]
-              )
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(note.title, style: TextStyle(fontSize: 22.0)),
+                    Divider(),
+                    new Text(
+                      note.createTime,
+                      style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                    ),
+                  ])
             ],
           ),
         ));

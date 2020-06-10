@@ -15,7 +15,6 @@ const List<Choice> choices = const <Choice>[
 ];
 
 class ChoiceCard extends StatelessWidget {
-  
   ChoiceCard({this.isDone});
 
   final bool isDone;
@@ -41,9 +40,53 @@ class ChoiceCard extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class MyBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return new Flex(direction: Axis.horizontal, children: <Widget>[
+      Expanded(
+        flex: 1,
+        child: RaisedButton.icon(
+          icon: Icon(Icons.send),
+          label: Text("发送"),
+          onPressed: null,
+        ),
+      ),
+      Expanded(
+        flex: 1,
+        child: RaisedButton.icon(
+          icon: Icon(Icons.send),
+          label: Text("发送"),
+          onPressed: null,
+        ),
+      ),
+    ]);
+  }
+}
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  final List<BottomNavigationBarItem> bottomNavItems = [
+    BottomNavigationBarItem(
+      backgroundColor: Colors.black,
+      icon: Icon(Icons.alarm),
+      title: Text("提醒"),
+    ),
+    BottomNavigationBarItem(
+      backgroundColor: Colors.black,
+      icon: Icon(IconData(0xe602, fontFamily: 'iconfont')),
+      title: Text("新建便签"),
+    )
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+
     return new DefaultTabController(
         length: choices.length,
         child: new Scaffold(
@@ -55,14 +98,13 @@ class Home extends StatelessWidget {
               }).toList(),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              // 跳转到添加页面
-              Navigator.push(context, MaterialPageRoute(builder: (_) {
-                return AddNoteScreen();
-              }));
+          bottomNavigationBar: BottomNavigationBar(
+            items: bottomNavItems,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) {
+              _clickButton(context, index);
             },
-            child: Icon(Icons.add, color: Colors.white, size: 40),
+            fixedColor: Colors.black,
           ),
           body: new TabBarView(children: [
             new ChoiceCard(isDone: true),
@@ -70,14 +112,20 @@ class Home extends StatelessWidget {
           ]),
         ));
   }
+
+  _clickButton(BuildContext context, index) {
+    // debug
+    print(index);
+    // Navigator.push(context, MaterialPageRoute(builder: (_) {
+    //   return AddNoteScreen();
+    // }));
+  }
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        title: "tabTar示例",
-        home: new Home());
+    return new MaterialApp(title: "tabTar示例", home: new Home());
   }
 }
 
