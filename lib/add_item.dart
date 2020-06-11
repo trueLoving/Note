@@ -53,7 +53,6 @@ class AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          // title: new Text('ADD'),
           actions: <Widget>[
             IconButton(
                 icon: Icon(Icons.check, color: Colors.white),

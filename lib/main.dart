@@ -21,24 +21,14 @@ class ChoiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (this.isDone) {
-      return new ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return new NoteItem(note: notes[index]);
-          },
-          itemCount: notes.length);
-    } else {
-      return new Card(
-          color: Colors.white,
-          child: new Center(
-            child: new Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[new Text('Hello World')]),
-          ));
-    }
+    return new ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return new NoteItem(note: notes[index]);
+        },
+        itemCount: notes.length);
   }
 }
+
 
 class MyBottomBar extends StatelessWidget {
   @override
@@ -69,6 +59,32 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
+
+
+class BaseViewBar extends PreferredSize{
+
+  Widget childView;
+
+  @override
+  final Size preferredSize;
+
+  BaseViewBar({this.preferredSize, this.childView});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget current = childView;
+    if (childView == null) {
+      current = LimitedBox(
+        maxWidth: 0.0,
+        maxHeight: 0.0,
+        child: ConstrainedBox(constraints: const BoxConstraints.expand()),
+      );
+    }
+    return current;
+  }
+
+}
+
 class _HomeState extends State<Home> {
 
   final List<BottomNavigationBarItem> bottomNavItems = [
@@ -86,40 +102,44 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
-    return new DefaultTabController(
-        length: choices.length,
-        child: new Scaffold(
-          appBar: new AppBar(
-            title: new Text('NOTES'),
-            bottom: new TabBar(
-              tabs: choices.map((Choice choice) {
-                return new Tab(text: choice.title, icon: new Icon(choice.icon));
-              }).toList(),
-            ),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: bottomNavItems,
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) {
-              _clickButton(context, index);
-            },
-            fixedColor: Colors.black,
-          ),
-          body: new TabBarView(children: [
-            new ChoiceCard(isDone: true),
-            new ChoiceCard(isDone: false),
-          ]),
-        ));
+    return new Scaffold(
+      appBar: new AppBar(
+        title:new Text('Note'),
+        centerTitle: true, 
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_horiz, color: Colors.white),
+            onPressed: () {
+              print('finished');
+            }
+          )
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: bottomNavItems,
+        type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          _clickButton(context, index);
+        },
+        fixedColor: Colors.black87,
+      ),
+      body: new Container(
+        decoration: new BoxDecoration(
+          color:Colors.white
+        ),
+        child:new ChoiceCard(isDone: true),
+      )
+    );
   }
 
   _clickButton(BuildContext context, index) {
     // debug
     print(index);
-    // Navigator.push(context, MaterialPageRoute(builder: (_) {
-    //   return AddNoteScreen();
-    // }));
+    Navigator.push(context, MaterialPageRoute(builder: (_) {
+      return AddNoteScreen();
+    }));
   }
+
 }
 
 class MyApp extends StatelessWidget {
