@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './note_item.dart';
-import './add_item.dart';
+import 'package:note/views/add_item.dart';
 
-class Choice {
-  const Choice({this.title, this.icon});
-  final String title;
-  final IconData icon;
-}
-
-const List<Choice> choices = const <Choice>[
-  const Choice(title: 'TODO', icon: IconData(0xe8e6, fontFamily: 'iconfont')),
-  const Choice(title: 'DONE', icon: IconData(0xe616, fontFamily: 'iconfont'))
-];
+import 'package:note/components/note_item.dart';
 
 class ChoiceCard extends StatelessWidget {
-  ChoiceCard({this.isDone});
-
-  final bool isDone;
-
   @override
   Widget build(BuildContext context) {
     return new ListView.builder(
@@ -29,64 +15,12 @@ class ChoiceCard extends StatelessWidget {
   }
 }
 
-
-class MyBottomBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Flex(direction: Axis.horizontal, children: <Widget>[
-      Expanded(
-        flex: 1,
-        child: RaisedButton.icon(
-          icon: Icon(Icons.send),
-          label: Text("发送"),
-          onPressed: null,
-        ),
-      ),
-      Expanded(
-        flex: 1,
-        child: RaisedButton.icon(
-          icon: Icon(Icons.send),
-          label: Text("发送"),
-          onPressed: null,
-        ),
-      ),
-    ]);
-  }
-}
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-
-
-class BaseViewBar extends PreferredSize{
-
-  Widget childView;
-
-  @override
-  final Size preferredSize;
-
-  BaseViewBar({this.preferredSize, this.childView});
-
-  @override
-  Widget build(BuildContext context) {
-    Widget current = childView;
-    if (childView == null) {
-      current = LimitedBox(
-        maxWidth: 0.0,
-        maxHeight: 0.0,
-        child: ConstrainedBox(constraints: const BoxConstraints.expand()),
-      );
-    }
-    return current;
-  }
-
-}
-
 class _HomeState extends State<Home> {
-
   final List<BottomNavigationBarItem> bottomNavItems = [
     BottomNavigationBarItem(
       backgroundColor: Colors.black,
@@ -103,33 +37,50 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title:new Text('Note'),
-        centerTitle: true, 
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_horiz, color: Colors.white),
-            onPressed: () {
-              print('finished');
-            }
-          )
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: bottomNavItems,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          _clickButton(context, index);
-        },
-        fixedColor: Colors.black87,
-      ),
-      body: new Container(
-        decoration: new BoxDecoration(
-          color:Colors.white
+        appBar: new AppBar(
+          title: new Text('Note'),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.more_horiz, color: Colors.white),
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return new Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              new ListTile(
+                                leading: new Icon(Icons.photo_camera),
+                                title: new Text('Camera'),
+                                onTap: () {
+                                  print('camera');
+                                },
+                              ),
+                              new ListTile(
+                                leading: new Icon(Icons.photo_library),
+                                title: new Text('Photos'),
+                                onTap: () {
+                                  print('photos');
+                                },
+                              ),
+                            ]);
+                      });
+                })
+          ],
         ),
-        child:new ChoiceCard(isDone: true),
-      )
-    );
+        bottomNavigationBar: BottomNavigationBar(
+          items: bottomNavItems,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            _clickButton(context, index);
+          },
+          fixedColor: Colors.black87,
+        ),
+        body: new Container(
+          decoration: new BoxDecoration(color: Colors.white),
+          child: new ChoiceCard(),
+        ));
   }
 
   _clickButton(BuildContext context, index) {
@@ -139,7 +90,6 @@ class _HomeState extends State<Home> {
       return AddNoteScreen();
     }));
   }
-
 }
 
 class MyApp extends StatelessWidget {

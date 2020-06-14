@@ -1,42 +1,32 @@
 import 'package:flutter/material.dart';
 
+import 'package:note/model/note.dart';
+
 const List<Note> notes = const <Note>[
-  const Note('标题1', '内容1', '2019-01-01', false),
-  const Note('标题2', '内容2', '2019-01-01', true),
-  const Note('标题3', '内容3', '2019-01-01', false),
-  const Note('标题4', '内容4', '2019-01-01', true),
-  const Note('标题5', '内容5', '2019-01-01', false),
-  const Note('标题1', '内容1', '2019-01-01', false),
-  const Note('标题2', '内容2', '2019-01-01', true),
-  const Note('标题3', '内容3', '2019-01-01', false),
-  const Note('标题4', '内容4', '2019-01-01', true),
-  const Note('标题5', '内容5', '2019-01-01', false),
-  const Note('标题1', '内容1', '2019-01-01', false),
-  const Note('标题2', '内容2', '2019-01-01', true),
-  const Note('标题3', '内容3', '2019-01-01', false),
-  const Note('标题4', '内容4', '2019-01-01', true),
-  const Note('标题5', '内容5', '2019-01-01', false),
-  const Note('标题1', '内容1', '2019-01-01', false),
-  const Note('标题2', '内容2', '2019-01-01', true),
-  const Note('标题3', '内容3', '2019-01-01', false),
-  const Note('标题4', '内容4', '2019-01-01', true),
-  const Note('标题5', '内容5', '2019-01-01', false),
+  const Note(1,'标题1', '内容1', '2019-01-01', false),
+  const Note(2,'标题2', '内容2', '2019-01-01', true),
+  const Note(3,'标题3', '内容3', '2019-01-01', false),
+  const Note(4,'标题4', '内容4', '2019-01-01', true),
+  const Note(5,'标题5', '内容5', '2019-01-01', false),
+  const Note(6,'标题1', '内容1', '2019-01-01', false),
+  const Note(7,'标题2', '内容2', '2019-01-01', true),
+  const Note(8,'标题3', '内容3', '2019-01-01', false),
+  const Note(9,'标题4', '内容4', '2019-01-01', true),
+  const Note(10,'标题5', '内容5', '2019-01-01', false),
+  const Note(11,'标题1', '内容1', '2019-01-01', false),
+  const Note(12,'标题2', '内容2', '2019-01-01', true),
+  const Note(13,'标题3', '内容3', '2019-01-01', false),
+  const Note(14,'标题4', '内容4', '2019-01-01', true),
+  const Note(15,'标题5', '内容5', '2019-01-01', false),
+  const Note(16,'标题1', '内容1', '2019-01-01', false),
+  const Note(17,'标题2', '内容2', '2019-01-01', true),
+  const Note(18,'标题3', '内容3', '2019-01-01', false),
+  const Note(19,'标题4', '内容4', '2019-01-01', true),
+  const Note(20,'标题5', '内容5', '2019-01-01', false),
 ];
 
-class Note {
-  // 标签标题
-  final String title;
-  // 标签内容
-  final String content;
-  // 标签创建时间
-  final String createTime;
-  // 标签状态
-  final bool isDone;
-
-  const Note(this.title, this.content, this.createTime, this.isDone);
-}
-
 class OverflowText extends StatelessWidget {
+
   final String text;
 
   const OverflowText({Key key, this.text = 'Hello World'}) : super(key: key);
