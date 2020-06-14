@@ -1,32 +1,21 @@
 import 'package:flutter/material.dart';
-
 import 'package:note/model/note.dart';
 
-const List<Note> notes = const <Note>[
-  const Note(1,'标题1', '内容1', '2019-01-01', false),
-  const Note(2,'标题2', '内容2', '2019-01-01', true),
-  const Note(3,'标题3', '内容3', '2019-01-01', false),
-  const Note(4,'标题4', '内容4', '2019-01-01', true),
-  const Note(5,'标题5', '内容5', '2019-01-01', false),
-  const Note(6,'标题1', '内容1', '2019-01-01', false),
-  const Note(7,'标题2', '内容2', '2019-01-01', true),
-  const Note(8,'标题3', '内容3', '2019-01-01', false),
-  const Note(9,'标题4', '内容4', '2019-01-01', true),
-  const Note(10,'标题5', '内容5', '2019-01-01', false),
-  const Note(11,'标题1', '内容1', '2019-01-01', false),
-  const Note(12,'标题2', '内容2', '2019-01-01', true),
-  const Note(13,'标题3', '内容3', '2019-01-01', false),
-  const Note(14,'标题4', '内容4', '2019-01-01', true),
-  const Note(15,'标题5', '内容5', '2019-01-01', false),
-  const Note(16,'标题1', '内容1', '2019-01-01', false),
-  const Note(17,'标题2', '内容2', '2019-01-01', true),
-  const Note(18,'标题3', '内容3', '2019-01-01', false),
-  const Note(19,'标题4', '内容4', '2019-01-01', true),
-  const Note(20,'标题5', '内容5', '2019-01-01', false),
+List<Note> notes = [
+  new Note(1, 'title1', 'content1', 'createTime1', 1),
+  new Note(2, 'title2', 'content2', 'createTime2', 0),
+  new Note(3, 'title3', 'content3', 'createTime3', 1),
+  new Note(4, 'title4', 'content4', 'createTime4', 0),
+  new Note(5, 'title5', 'content5', 'createTime5', 1),
+  new Note(6, 'title6', 'content6', 'createTime6', 0),
+  new Note(7, 'title7', 'content7', 'createTime7', 1),
+  new Note(8, 'title8', 'content8', 'createTime8', 0),
+  new Note(9, 'title9', 'content9', 'createTime9', 1),
+  new Note(10, 'title10', 'content10', 'createTime10', 1),
+  new Note(11, 'title11', 'content11', 'createTime11', 1)
 ];
 
 class OverflowText extends StatelessWidget {
-
   final String text;
 
   const OverflowText({Key key, this.text = 'Hello World'}) : super(key: key);

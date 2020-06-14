@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:note/views/add_item.dart';
-
 import 'package:note/components/note_item.dart';
 
 class ChoiceCard extends StatelessWidget {
